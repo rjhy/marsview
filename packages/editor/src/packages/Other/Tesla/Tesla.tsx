@@ -11,7 +11,7 @@ import {
   WebGLRenderer,
 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 export interface TeslaConfig {
   width: number;
@@ -27,19 +27,10 @@ const Tesla = ({ id, type, config }: ComponentType<TeslaConfig>, ref: any) => {
     z: 3,
   }; // 相机的默认坐标
   const [map, setMap] = useState(defaultMap); //把相机坐标设置成可观察对象
-  let scene: Scene,
-    camera: PerspectiveCamera,
-    renderer: WebGLRenderer,
-    controls: OrbitControls,
-    floor,
-    dhelper,
-    hHelper,
-    directionalLight,
-    hemisphereLight; // 定义所有three实例变量
+  let scene: Scene, camera: PerspectiveCamera, renderer: WebGLRenderer, controls: OrbitControls, dhelper, hHelper, directionalLight, hemisphereLight; // 定义所有three实例变量
 
   // 创建场景
   const setScene = () => {
-    console.log('init setScene');
     scene = new Scene();
     renderer = new WebGLRenderer();
     scene.background = new Color('#0D162F');
@@ -51,7 +42,6 @@ const Tesla = ({ id, type, config }: ComponentType<TeslaConfig>, ref: any) => {
 
   //创建灯光
   const setLight = () => {
-    console.log('init setLight');
     directionalLight = new DirectionalLight(0xffffff, 0.5);
     directionalLight.position.set(-4, 8, 4);
     dhelper = new DirectionalLightHelper(directionalLight, 5, 0xff0000);
@@ -108,7 +98,6 @@ const Tesla = ({ id, type, config }: ComponentType<TeslaConfig>, ref: any) => {
     const currentColor = new Color(color);
     scene.traverse((child: any) => {
       if (child.isMesh) {
-        console.log(child.name);
         if (child.name.includes('door_')) {
           child.material.color.set(currentColor);
         }
@@ -120,15 +109,14 @@ const Tesla = ({ id, type, config }: ComponentType<TeslaConfig>, ref: any) => {
     return new Promise((resolve, reject) => {
       loader.load(
         url,
-        (gltf) => {
+        (gltf: any) => {
           resolve(gltf);
         },
-        ({ loaded, total }) => {
-          // let load = Math.abs((loaded / total) * 100);
+        ({ loaded, total }: any) => {
           console.log((loaded / total) * 100 + '% loaded');
         },
-        (err) => {
-          reject(err);
+        () => {
+          reject('load error');
         },
       );
     });
