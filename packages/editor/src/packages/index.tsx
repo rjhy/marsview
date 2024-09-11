@@ -8,4 +8,5 @@ export * from './Functional';
 export * from './Basic';
 export * from './FeedBack';
 export { IFrame, IFrameConfig } from './IFrame';
+export { Tesla, TeslaConfig } from './Other';
 import './index.less';

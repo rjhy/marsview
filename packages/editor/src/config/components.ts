@@ -356,6 +356,17 @@ const components = [
       },
     ],
   },
+  {
+    type: 'Other',
+    title: '其他',
+    data: [
+      {
+        icon: '',
+        name: '3D汽车',
+        type: 'Tesla',
+      },
+    ],
+  },
 ];
 
 export default components;
