@@ -140,7 +140,7 @@ const Tesla = ({ id, type, config }: ComponentType<TeslaConfig>, ref: any) => {
     setCamera();
     setLight();
     setControls();
-    const gltf: any = await loadFile('/tesla_roadster_2020_interior_2.0/scene.gltf');
+    const gltf: any = await loadFile('https://marsview.cdn.bcebos.com/resource/scene.gltf');
     scene?.add(gltf?.scene);
     loop();
     if (config.props.isAutoFun) isAutoFun();
